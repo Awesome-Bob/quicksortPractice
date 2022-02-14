@@ -20,7 +20,9 @@ public class Quicksort {
 
     private static void quicksort(int[] array, int lowIndex, int highIndex) {
         if(lowIndex>=highIndex)return;
-        int pivot = array[highIndex];
+        int pivotIndex = new Random().nextInt(highIndex - lowIndex) + lowIndex;
+        int pivot = array[pivotIndex];
+        swap(array,pivotIndex,highIndex);
         int leftPointer = partition(array, lowIndex, highIndex, pivot);
         quicksort(array,lowIndex,leftPointer-1);
         quicksort(array, leftPointer+1, highIndex);
@@ -39,7 +41,6 @@ public class Quicksort {
     private static int partition(int[] array, int lowIndex, int highIndex, int pivot){
         int leftPointer = lowIndex;
         int rightPointer = highIndex;
-
         while (leftPointer < rightPointer){
             while (array[leftPointer] <= pivot && leftPointer < rightPointer) leftPointer++;
             while (array[rightPointer] >= pivot && leftPointer < rightPointer) rightPointer--;
